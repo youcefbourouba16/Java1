@@ -6,6 +6,7 @@ package com.mycompany.project2_calculatrice;
 
 import java.awt.Button;
 import java.awt.Panel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +31,8 @@ public class calculatrice extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         num0 = new javax.swing.JButton();
         btn_off = new javax.swing.JButton();
         tf_display = new javax.swing.JTextField();
@@ -52,6 +55,13 @@ public class calculatrice extends javax.swing.JFrame {
         num9 = new javax.swing.JButton();
         tbn_dir = new javax.swing.JButton();
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -62,7 +72,7 @@ public class calculatrice extends javax.swing.JFrame {
         num0.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num0ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -71,9 +81,15 @@ public class calculatrice extends javax.swing.JFrame {
         btn_off.setForeground(new java.awt.Color(255, 255, 255));
         btn_off.setText("OFF");
         btn_off.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_off.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_offActionPerformed(evt);
+            }
+        });
 
         tf_display.setBackground(new java.awt.Color(255, 255, 255));
         tf_display.setForeground(new java.awt.Color(0, 0, 0));
+        tf_display.setFocusable(false);
 
         num1.setBackground(new java.awt.Color(255, 255, 255));
         num1.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -82,7 +98,7 @@ public class calculatrice extends javax.swing.JFrame {
         num1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num1ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -91,6 +107,11 @@ public class calculatrice extends javax.swing.JFrame {
         jButton11.setForeground(new java.awt.Color(0, 0, 0));
         jButton11.setText("AC");
         jButton11.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         num2.setBackground(new java.awt.Color(255, 255, 255));
         num2.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -99,7 +120,7 @@ public class calculatrice extends javax.swing.JFrame {
         num2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num2ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -116,7 +137,7 @@ public class calculatrice extends javax.swing.JFrame {
         num3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num3ActionPerformed1(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -133,7 +154,7 @@ public class calculatrice extends javax.swing.JFrame {
         num4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num3ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -142,6 +163,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_mult.setForeground(new java.awt.Color(0, 0, 0));
         tbn_mult.setText("x");
         tbn_mult.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_mult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operation_Handler(evt);
+            }
+        });
 
         num5.setBackground(new java.awt.Color(255, 255, 255));
         num5.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -150,7 +176,7 @@ public class calculatrice extends javax.swing.JFrame {
         num5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num5ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -159,6 +185,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_minus.setForeground(new java.awt.Color(0, 0, 0));
         tbn_minus.setText("-");
         tbn_minus.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_minus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operation_Handler(evt);
+            }
+        });
 
         num6.setBackground(new java.awt.Color(255, 255, 255));
         num6.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -167,7 +198,7 @@ public class calculatrice extends javax.swing.JFrame {
         num6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num3ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -176,6 +207,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_add.setForeground(new java.awt.Color(0, 0, 0));
         tbn_add.setText("+");
         tbn_add.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operation_Handler(evt);
+            }
+        });
 
         num7.setBackground(new java.awt.Color(255, 255, 255));
         num7.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -184,7 +220,7 @@ public class calculatrice extends javax.swing.JFrame {
         num7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num3ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -193,6 +229,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_result.setForeground(new java.awt.Color(0, 0, 0));
         tbn_result.setText("=");
         tbn_result.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_result.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operation_Handler(evt);
+            }
+        });
 
         num8.setBackground(new java.awt.Color(255, 255, 255));
         num8.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -201,15 +242,20 @@ public class calculatrice extends javax.swing.JFrame {
         num8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num3ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
-        jButton18.setBackground(new java.awt.Color(204, 255, 204));
+        jButton18.setBackground(new java.awt.Color(51, 51, 51));
         jButton18.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
-        jButton18.setForeground(new java.awt.Color(0, 0, 0));
-        jButton18.setText("Sing");
-        jButton18.setBorder(new javax.swing.border.MatteBorder(null));
+        jButton18.setForeground(new java.awt.Color(255, 255, 255));
+        jButton18.setText("BACK");
+        jButton18.setBorder(null);
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
+            }
+        });
 
         num9.setBackground(new java.awt.Color(255, 255, 255));
         num9.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -218,7 +264,7 @@ public class calculatrice extends javax.swing.JFrame {
         num9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         num9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                num9ActionPerformed(evt);
+                display_Numers_OnScreen(evt);
             }
         });
 
@@ -227,6 +273,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_dir.setForeground(new java.awt.Color(0, 0, 0));
         tbn_dir.setText("/");
         tbn_dir.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_dir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                operation_Handler(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -282,7 +333,7 @@ public class calculatrice extends javax.swing.JFrame {
                         .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,47 +377,64 @@ public class calculatrice extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    static String str="";
+   String str="";
+  double total=0;
     private void addToDisplay(String btnText){
         str+=btnText;
         tf_display.setText(str);
     }
-    private void num3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num3ActionPerformed
+    private void display_Numers_OnScreen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_Numers_OnScreen
         // TODO add your handling code here:
-addToDisplay(num3.getText());
-    }//GEN-LAST:event_num3ActionPerformed
+        JButton clickedButton = (JButton) evt.getSource();
+        addToDisplay(clickedButton.getText());
+    }//GEN-LAST:event_display_Numers_OnScreen
 
-    private void num9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num9ActionPerformed
-        // TODO add your handling code here
-addToDisplay(num9.getText());
-    }//GEN-LAST:event_num9ActionPerformed
+ 
+    
+                
+    private void operation_Handler(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operation_Handler
+         
+        JButton clickedButton = (JButton) evt.getSource();
+        String newOperation=clickedButton.getText();
+        if (newOperation=="=") newOperation="";
+        double total;
+        if (str=="") {
+             addToDisplay(newOperation);
+            
+        }else  if (Calc.containOperation(str)) {
+            //// obtenire l'operation
+            char op=Calc.extractOperation(str);
+            /// obtenire les nomber qui on va les calculer
+            double[] numbers=Calc.getNumbers(str);
+            total=Calc.calculate(numbers, op, newOperation);
+            str=total+newOperation;
+             tf_display.setText(str);
+        }else {
+            JButton m = (JButton) evt.getSource();
+            addToDisplay(m.getText());
+        }
+    }//GEN-LAST:event_operation_Handler
 
-    private void num5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num5ActionPerformed
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
-addToDisplay(num5.getText());
-    }//GEN-LAST:event_num5ActionPerformed
+         str="";
+         total=0;
+        tf_display.setText(str);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void num0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num0ActionPerformed
+    private void btn_offActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_offActionPerformed
         // TODO add your handling code here:
-        addToDisplay(num0.getText());
-    }//GEN-LAST:event_num0ActionPerformed
+        dispose();
+    }//GEN-LAST:event_btn_offActionPerformed
 
-    private void num1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num1ActionPerformed
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
-        addToDisplay(num1.getText());
-    }//GEN-LAST:event_num1ActionPerformed
+        str=str.substring(0, str.length()-1);
+         tf_display.setText(str);
+        
+    }//GEN-LAST:event_jButton18ActionPerformed
 
-    private void num2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num2ActionPerformed
-        // TODO add your handling code here:
-        addToDisplay(num2.getText());
-    }//GEN-LAST:event_num2ActionPerformed
-
-    private void num3ActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num3ActionPerformed1
-        // TODO add your handling code here:
-        addToDisplay(num3.getText());
-    }//GEN-LAST:event_num3ActionPerformed1
-
+    
     /**
      * @param args the command line arguments
      */
@@ -408,6 +476,8 @@ addToDisplay(num5.getText());
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton18;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton num0;
     private javax.swing.JButton num1;
     private javax.swing.JButton num2;
