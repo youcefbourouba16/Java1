@@ -1,0 +1,2 @@
+Double s=0.55555;
+        tf_display.setText(String.format("%.4f", s));

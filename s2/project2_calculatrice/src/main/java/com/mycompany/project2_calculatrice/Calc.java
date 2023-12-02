@@ -13,30 +13,35 @@ import javax.swing.JOptionPane;
 public class Calc {
     public static boolean containOperation(String str){
         char firstChar =str.charAt(0);
+        str=str.substring(1);
         if (!Character.isDigit(firstChar)){
-           
+
             return false;
         }else  if (str.contains("+") || str.contains("-") || str.contains("x") || str.contains("/")) {
             return true;
         }else return false;
     }
-    
+
     public static char extractOperation(String m){
-        
+
         String str=m.substring(1);
         if (str.contains("+") )return '+';
-        else if  (str.contains("-") ) return '-'; 
-        else if (str.contains("x")) return 'x'; 
-        else if  (str.contains("/")) return '/'; 
+        else if  (str.contains("-") ) return '-';
+        else if (str.contains("x")) return 'x';
+        else if  (str.contains("/")) return '/';
         else return 'N';
         }
     public static double[] getNumbers(String str){
         double[] numbers=new double[2];
         char op=extractOperation(str);
         int index =str.indexOf(op);
+       
         String num1 = str.substring(0, index);
         String num2 = str.substring(index+1, str.length());
-        numbers[0]=Double.parseDouble(num1);
+        if (num1.contains("-")) {
+            numbers[0]=Double.parseDouble(num1);
+        }
+        else numbers[0]=Double.parseDouble(num1);
         numbers[1]=Double.parseDouble(num2);
         return numbers;
     }
@@ -57,6 +62,7 @@ public class Calc {
             else {
             total=(numbers[0]/numbers[1]);
             break;}
+
      }
      return total;
     }

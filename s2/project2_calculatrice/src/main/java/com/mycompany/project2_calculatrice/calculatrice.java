@@ -129,6 +129,11 @@ public class calculatrice extends javax.swing.JFrame {
         tbn_point.setForeground(new java.awt.Color(0, 0, 0));
         tbn_point.setText(",");
         tbn_point.setBorder(new javax.swing.border.MatteBorder(null));
+        tbn_point.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbn_pointActionPerformed(evt);
+            }
+        });
 
         num3.setBackground(new java.awt.Color(255, 255, 255));
         num3.setFont(new java.awt.Font("Courier New", 3, 24)); // NOI18N
@@ -396,6 +401,11 @@ public class calculatrice extends javax.swing.JFrame {
          
         JButton clickedButton = (JButton) evt.getSource();
         String newOperation=clickedButton.getText();
+        char pp=tf_display.getText().charAt(0);
+        JOptionPane.showMessageDialog(null, pp);
+        if (tf_display.getText().charAt(0)=='-') {
+            
+        }
         if (newOperation=="=") newOperation="";
         double total;
         if (str=="") {
@@ -425,14 +435,24 @@ public class calculatrice extends javax.swing.JFrame {
     private void btn_offActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_offActionPerformed
         // TODO add your handling code here:
         dispose();
+        Double s=0.55555;
+        tf_display.setText(String.format("%.4f", s));
+        
     }//GEN-LAST:event_btn_offActionPerformed
 
+    
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
         str=str.substring(0, str.length()-1);
          tf_display.setText(str);
         
     }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void tbn_pointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_pointActionPerformed
+        // TODO add your handling code here:
+        addToDisplay(".");
+        
+    }//GEN-LAST:event_tbn_pointActionPerformed
 
     
     /**
