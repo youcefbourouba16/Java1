@@ -28,7 +28,7 @@ public class ResirvationUI extends javax.swing.JFrame {
      */
      List<String> list_Wilaya = new ArrayList<>();
      int loadCount=0;
-     
+     static Model1 resirvationInfo=new Model1();
      public enum IdentityType {
     // Enum constants
     PASSPORT,
@@ -158,6 +158,11 @@ public class ResirvationUI extends javax.swing.JFrame {
         setBackground(new java.awt.Color(204, 204, 255));
         setForeground(new java.awt.Color(204, 204, 255));
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         cb_distination.setFont(new java.awt.Font("Cascadia Code", 0, 12)); // NOI18N
         cb_distination.addItemListener(new java.awt.event.ItemListener() {
@@ -175,9 +180,19 @@ public class ResirvationUI extends javax.swing.JFrame {
 
         tf_nom.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
         tf_nom.setName("Nom"); // NOI18N
+        tf_nom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         tf_prenom.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
         tf_prenom.setName("Prenom "); // NOI18N
+        tf_prenom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         jLabel1.setText("Nom :");
@@ -210,6 +225,11 @@ public class ResirvationUI extends javax.swing.JFrame {
 
         tf_num.setFont(new java.awt.Font("Cascadia Code", 0, 18)); // NOI18N
         tf_num.setName("Num Identite"); // NOI18N
+        tf_num.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tf_numKeyTyped(evt);
+            }
+        });
 
         jl_numPass.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
         jl_numPass.setText("Num Pass   :");
@@ -309,9 +329,7 @@ public class ResirvationUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jd_delicration, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jd_expiration, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(42, 42, 42))))
+                                    .addComponent(jd_expiration, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel12)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jl_bagage)
@@ -500,6 +518,15 @@ public class ResirvationUI extends javax.swing.JFrame {
             ); return;
         }else setVisible_Elemnts(true);
         validation_TF(tf_nom,tf_prenom,tf_num);
+        
+        if (jSpinner1.getValue().equals(0)) {
+            int c=JOptionPane.showConfirmDialog(null,
+                     "Allez-vous régler le poids des bagages à 0 ??",
+                     "Confirmation",
+                     JOptionPane.YES_NO_OPTION);
+            if (c==JOptionPane.NO_OPTION) return;
+
+        }
     }
     private void changerLabel(IdentityType s){
         jl_declaration.setText("Date de delicration "+s+" :");
@@ -510,6 +537,11 @@ public class ResirvationUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         validation();
         String IdType,classe,AR;
+        
+        if (rb_passport.isSelected()) {
+            IdType=IdentityType.PASSPORT.toString();
+        }else IdType=IdentityType.CI.toString();
+        
         if (rb_buissnes.isSelected()) {
             classe="buisness";
         }else classe="economique";
@@ -517,13 +549,36 @@ public class ResirvationUI extends javax.swing.JFrame {
         if (rb_allerSimpl.isSelected()) {
             AR="Aller Simple";
         }else AR="Aller retour .";
+
+        resirvationInfo=new Model1(tf_nom.getText(), 
+                 tf_prenom.getText(), 
+                 cb_depart.getSelectedItem().toString(),
+                 cb_distination.getSelectedItem().toString(), 
+                 jCalendar1.getDate(), 
+                 classe, 
+                      AR, 
+                 IdType, 
+                 Integer.parseInt(tf_num.getText()) , 
+                 jd_delicration.getDate(),
+                 jd_expiration.getDate(),
+                 Integer.parseInt(jSpinner1.getValue().toString())
+                 );
+        
        
+            try {
+                frm_recap1 frm = new frm_recap1();
+                frm.pack();
+                frm.setLocationRelativeTo(null);
+                frm.setVisible(true);
+            } catch (Exception e) {
+               JOptionPane.showMessageDialog(null, e);
+            }
     }//GEN-LAST:event_btn_reserveActionPerformed
 
     private void cb_departItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_departItemStateChanged
         // TODO add your handling code here:
          if (loadCount==1) {
-           if (cb_depart.getSelectedItem().equals("choose wilaya")) {
+           if (cb_depart.getSelectedItem().toString().equals("choose wilaya")) {
             cb_depart.removeItemAt(0);
         }else return;  
         }else return;
@@ -552,6 +607,26 @@ public class ResirvationUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         changerLabel(IdentityType.CI);
     }//GEN-LAST:event_rb_CiItemStateChanged
+
+    private void tf_numKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_numKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+    if (!Character.isDigit(c)) {
+        // If the pressed key is not a digit, consume the event
+        evt.consume();
+    }
+    }//GEN-LAST:event_tf_numKeyTyped
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+       
+  
+    if (!Character.isLetter(c) || c == evt.VK_ESCAPE ) {
+        // If the pressed key is not a digit, consume the event
+        evt.consume();  
+    }
+    }//GEN-LAST:event_formKeyTyped
 
     /**
      * @param args the command line arguments
@@ -586,6 +661,7 @@ public class ResirvationUI extends javax.swing.JFrame {
                 new ResirvationUI().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

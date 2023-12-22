@@ -39,6 +39,11 @@ public class Model1 {
     public Date Date_Experation;
     
     public int Bagage;
+
+    public Model1() {
+    }
+
+    
     
     
     
